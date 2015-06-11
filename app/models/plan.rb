@@ -1,6 +1,6 @@
 class Plan < ActiveRecord::Base
-  #validates :ind_40_prem, :presence => true
-  #validates :plan_name, :presence => true
+  validates :ind_40_prem, :presence => true
+  validates :plan_name, :presence => true
 
   has_many :comparisons , :class_name => "Comparison", :foreign_key => "plan_id"
   belongs_to :plan_number , :class_name => "PlanNumber", :foreign_key => "plan_number_id"
