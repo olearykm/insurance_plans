@@ -1,0 +1,54 @@
+<!-- Responsive panel example-->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Plan #<%= @plan.id %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+              <dt>Ind 40 prem</dt>
+              <dd>$ <%= @plan.ind_40_prem %></dd>
+
+              <dt>Ind 27 prem</dt>
+              <dd>$ <%= @plan.ind_27_prem %></dd>
+
+              <dt>Insurer</dt>
+              <dd><%= @plan.insurer.insurer %></dd>
+
+              <dt>County</dt>
+              <dd><%= @plan.county.county %></dd>
+
+              <dt>State</dt>
+              <dd><%= @plan.state.state %></dd>
+
+              <dt>Plan name</dt>
+              <dd><%= @plan.plan_name %></dd>
+
+              <dt>Plan type</dt>
+              <dd><%= @plan.plan_type.plan_type %></dd>
+
+              <dt>Year</dt>
+              <dd><%= @plan.year.year %></dd>
+
+              <dt>Metal level</dt>
+              <dd><%= @plan.metal_level.metal_level %></dd>
+
+            </dl>
+            <div class="btn-group btn-group-justified">
+              <a href="/plans" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->

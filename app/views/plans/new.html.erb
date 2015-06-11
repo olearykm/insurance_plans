@@ -1,0 +1,141 @@
+<!-- Validation failure messages -->
+
+<% if @plan.errors.any? %>
+  <% @plan.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add Plan</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/create_plan" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for ind_40_prem -->
+          <div class="form-group">
+            <label for="ind_40_prem" class="col-sm-2 control-label">
+              Ind 40 prem
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="ind_40_prem" name="ind_40_prem" placeholder="Ind 40 prem" class="form-control" value="<%= @plan.ind_40_prem %>">
+            </div>
+          </div>
+
+          <!-- Label and input for ind_27_prem -->
+          <div class="form-group">
+            <label for="ind_27_prem" class="col-sm-2 control-label">
+              Ind 27 prem
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="ind_27_prem" name="ind_27_prem" placeholder="Ind 27 prem" class="form-control" value="<%= @plan.ind_27_prem %>">
+            </div>
+          </div>
+
+          <!-- Label and input for insurer_id -->
+          <div class="form-group">
+            <label for="insurer_id" class="col-sm-2 control-label">
+              Insurer
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:insurer_id, options_from_collection_for_select(Insurer.all, :id, :insurer, @plan.insurer_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <!-- Label and input for county_id -->
+          <div class="form-group">
+            <label for="county_id" class="col-sm-2 control-label">
+              County
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:county_id, options_from_collection_for_select(County.all, :id, :county, @plan.county_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <!-- Label and input for plan_number_id
+          <div class="form-group">
+            <label for="plan_number_id" class="col-sm-2 control-label">
+              Plan number
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="plan_number_id" name="plan_number_id" placeholder="Plan number" class="form-control" value="<%= @plan.plan_number_id %>">
+            </div>
+          </div>
+          -->
+
+          <!-- Label and input for plan_name -->
+          <div class="form-group">
+            <label for="plan_name" class="col-sm-2 control-label">
+              Plan name
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="plan_name" name="plan_name" placeholder="Plan name" class="form-control" value="<%= @plan.plan_name %>">
+            </div>
+          </div>
+
+          <!-- Label and input for state_id -->
+          <div class="form-group">
+            <label for="state_id" class="col-sm-2 control-label">
+              State
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:state_id, options_from_collection_for_select(State.all, :id, :state, @plan.state_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <!-- Label and input for plan_type_id -->
+          <div class="form-group">
+            <label for="plan_type_id" class="col-sm-2 control-label">
+              Plan type
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:plan_type_id, options_from_collection_for_select(PlanType.all, :id, :plan_type, @plan.plan_type_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <!-- Label and input for year_id -->
+          <div class="form-group">
+            <label for="year_id" class="col-sm-2 control-label">
+              Year
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:year_id, options_from_collection_for_select(Year.all, :id, :year, @plan.year_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <!-- Label and input for metal_level_id -->
+          <div class="form-group">
+            <label for="metal_level_id" class="col-sm-2 control-label">
+              Metal level
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:metal_level_id, options_from_collection_for_select(MetalLevel.all, :id, :metal_level, @plan.metal_level_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-success">
+                Create Plan
+              </button>
+              or
+              <a href="/plans">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->

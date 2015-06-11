@@ -1,0 +1,152 @@
+<div class="page-header">
+  <h1>
+    Comparisons
+    <a href="/comparisons/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
+  </h1>
+</div>
+
+<!-- Responsive, Isotope-based layout example -->
+
+<%= search_form_for @q do |f| %>
+  <p class="lead">First county:</p>
+
+  <div class="form-group col-sm-6">
+    <%= f.label :plan_county_county_cont, "County:" %>
+    <%= f.text_field :plan_county_county_cont, :class => "form-control", :placeholder => "i.e. Cook" %>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <%= f.label :plan_state_state_cont, "State:" %>
+    <%= f.text_field :plan_state_state_cont, :class => "form-control", :placeholder => "i.e. IL" %>
+  </div>
+
+  <%= f.submit :class => "btn btn-primary col-sm-6" %>
+
+  <a href="/plans" class="btn btn-default col-sm-6">Clear filters</a>
+<% end %>
+
+<hr>
+
+<%= search_form_for @r do |f| %>
+  <p class="lead">Second county:</p>
+
+  <div class="form-group col-sm-6">
+    <%= f.label :plan_county_county_cont, "County:" %>
+    <%= f.text_field :plan_county_county_cont, :class => "form-control", :placeholder => "i.e. Cook" %>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <%= f.label :plan_state_state_cont, "State:" %>
+    <%= f.text_field :plan_state_state_cont, :class => "form-control", :placeholder => "i.e. IL" %>
+  </div>
+
+  <%= f.submit :class => "btn btn-primary col-sm-6" %>
+
+  <a href="/plans" class="btn btn-default col-sm-6">Clear filters</a>
+<% end %>
+
+
+
+<div class="row isotope-container">
+<% @comparisons.each do |comparison| %>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Comparison #<%= comparison.id %></h3>
+      </div>
+      <div class="panel-body">
+        <dl>
+          <dt>User</dt>
+          <dd><%= comparison.user_id %></dd>
+
+          <dt>Plan</dt>
+          <dd><%= comparison.plan_id %></dd>
+
+          <dt>Plan type</dt>
+          <dd><%= comparison.plan_type_id %></dd>
+
+          <dt>Plan number</dt>
+          <dd><%= comparison.plan_number_id %></dd>
+
+          <dt>Metal level</dt>
+          <dd><%= comparison.metal_level_id %></dd>
+
+          <dt>Insurer</dt>
+          <dd><%= comparison.insurer_id %></dd>
+
+          <dt>State</dt>
+          <dd><%= comparison.state_id %></dd>
+
+          <dt>Year</dt>
+          <dd><%= comparison.year_id %></dd>
+
+          <dt>County</dt>
+          <dd><%= comparison.county_id %></dd>
+
+        </dl>
+        <div class="btn-group btn-group-justified">
+          <a href="/comparisons/<%= comparison.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+
+          <a href="/comparisons/<%= comparison.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+
+          <a href="/delete_comparison/<%= comparison.id %>" class="btn btn-danger" rel="nofollow">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<!-- You can ignore the following. It's a quick and dirty example of how to get a Pinterest-style layout with quick search. -->
+<!-- JavaScript for Isotope layout and quicksearch -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
+<script>
+  $(function() {
+    // quick search regex
+    var qsRegex;
+
+    // init Isotope
+    var $container = $('.isotope-container');
+
+    $container.imagesLoaded(function() {
+      $container.isotope({
+        itemSelector: '.isotope-item',
+        layoutMode: 'masonry',
+        filter: function() {
+          return qsRegex ? $(this).text().match( qsRegex ) : true;
+        }
+      })
+    });
+
+    // use value of search field to filter
+    var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+      qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+      $container.isotope();
+    }, 200 ) );
+
+  });
+
+  // debounce so filtering doesn't happen every millisecond
+  function debounce( fn, threshold ) {
+    var timeout;
+    return function debounced() {
+      if ( timeout ) {
+        clearTimeout( timeout );
+      }
+      function delayed() {
+        fn();
+        timeout = null;
+      }
+      timeout = setTimeout( delayed, threshold || 100 );
+    }
+  }
+</script>
+
+<!-- End responsive, Isotope-based layout example -->
